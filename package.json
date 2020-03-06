@@ -1,29 +1,28 @@
 {
-  "name": "unit10hw",
+  "name": "Employee-Generator",
   "version": "1.0.0",
-  "description": "OOP and testing for week 10 homework",
+  "description": "",
   "main": "app.js",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "test": "jest --verbose test/*"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevetrilogy/unit10hw.git"
+    "url": "git+https://github.com/tarthurf/Employee-Generator.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stevetrilogy/unit10hw/issues"
+    "url": "https://github.com/tarthurf/Employee-Generator/issues"
   },
-  "homepage": "https://github.com/stevetrilogy/unit10hw#readme",
+  "homepage": "https://github.com/tarthurf/Employee-Generator#readme",
   "dependencies": {
-    "inquirer": "^6.5.2"
-  },
-  "devDependencies": {
-    "jest": "^24.9.0"
+    "inquirer": "^7.0.6",
+    "jest": "^25.1.0"
   }
 }
