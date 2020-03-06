@@ -1,5 +1,5 @@
 {
-  "name": "Employee-Generator",
+  "name": "employee-generator",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -14,7 +14,6 @@
     "type": "git",
     "url": "git+https://github.com/tarthurf/Employee-Generator.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
