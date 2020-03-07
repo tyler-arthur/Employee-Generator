@@ -4,10 +4,15 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+
 const render = require("./lib/htmlRenderer");
 
+require('events').EventEmitter.prototype._maxListeners = 100;
+
+let addedEmployees = [];
 
 const newEmployee = () => {
     inquirer.prompt([{
@@ -46,7 +51,10 @@ const newEngineer = (data) => {
     }
     ]).then(res => {
         data.push(res.github)
-        console.log(data)
+        const engineer = new Engineer(data[0], data[1], data[2], data[3])
+        addedEmployees.push(engineer);
+        console.log(addedEmployees)
+        nextEmployee();
     }).catch(err => {
         if (err) console.log(err);
     })
@@ -59,8 +67,11 @@ const newIntern = (data) => {
         message: 'What school do you currently attend?'
     }
     ]).then(res => {
-        data.push(res.github)
-        console.log(data)
+        data.push(res.school)
+        const intern = new Intern(data[0], data[1], data[2], data[3])
+        addedEmployees.push(intern);
+        console.log(addedEmployees)
+        nextEmployee();
     }).catch(err => {
         if (err) console.log(err);
     })
@@ -70,13 +81,31 @@ const newManager = (data) => {
     inquirer.prompt([{
         type: 'input',
         name: 'officeNumber',
-        message: 'What is your office number??'
+        message: 'What is your office number?'
     }
     ]).then(res => {
-        data.push(parseInt(res.officeNumber))
-        console.log(data)
+        data.push(parseInt(res.officeNumber));
+        const manager = new Manager(data[0], data[1], data[2], data[3])
+        addedEmployees.push(manager);
+        console.log(addedEmployees)
+        nextEmployee();
     }).catch(err => {
         if (err) console.log(err);
+    })
+}
+
+const nextEmployee = () => {
+    inquirer.prompt({
+        type: 'confirm',
+        name: 'continue',
+        message: 'Do you want to add another employee?'
+    }).then(res => {
+        if (res.continue === true) {
+            newEmployee()
+        }
+        else {
+            fs.appendFileSync(outputPath, render(addedEmployees))
+        };
     })
 }
 
@@ -89,7 +118,7 @@ newEmployee()
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
 
-// After you have your html, you're no ready to create an HTML file using the HTML
+// After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
 
