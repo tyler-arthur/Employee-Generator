@@ -20,9 +20,9 @@ const newEmployee = () => {
         name: 'name',
         message : 'What is your employee\'s name?'
     }, {
-        type: 'input',
+        type: 'number',
         name: 'id',
-        message : 'What is your employee\'s ID number?'
+        message : 'What is your employee\'s ID number?',
     }, {
         type: 'input',
         name: 'email',
@@ -104,7 +104,7 @@ const nextEmployee = () => {
             newEmployee()
         }
         else {
-            fs.appendFileSync(outputPath, render(addedEmployees))
+            fs.writeFileSync(outputPath, render(addedEmployees))
         };
     })
 }
